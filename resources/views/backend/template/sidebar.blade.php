@@ -66,7 +66,7 @@
         </li>
 
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">CRUD</span>
+            <span class="menu-header-text">Manajemen</span>
         </li>
 
         <li class="menu-item {{ request()->is('user') ? ' active' : '' }}">

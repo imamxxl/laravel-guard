@@ -195,7 +195,7 @@
         <!-- / Content -->
 
         <!-- Modal -->
-        <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="tambahUser" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog" role="dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -203,20 +203,55 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label for="nameBasic" class="form-label">Name</label>
-                                <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name" />
+                        <div class="row g-2">
+                            <div class="col mb-2">
+                                <label for="" class="form-label">Nama Depan</label>
+                                <input type="text" id="nama_depan" name="nama_depan" class="form-control"
+                                    placeholder="Nama depan" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                                <div class="input-group input-group-merge">
+                                    <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                            class="bx bx-user"></i></span>
+                                    <input type="text" class="form-control" id="basic-icon-default-fullname"
+                                        placeholder="John Doe" aria-label="John Doe"
+                                        aria-describedby="basic-icon-default-fullname2" />
+                                </div>
+                            </div>
+                            <div class="col mb-2">
+                                <label for="" class="form-label">Nama Belakang</label>
+                                <input type="text" id="name_belakang" name="name_belakang" class="form-control"
+                                    placeholder="Nama Belakang" />
                             </div>
                         </div>
+                        <div class="col mb-2">
+                            <label for="" class="form-label">Email</label>
+                            <input type="text" id="email" name="email" class="form-control"
+                                placeholder="nama.email@gmail.com" />
+                        </div>
                         <div class="row g-2">
-                            <div class="col mb-0">
-                                <label for="emailBasic" class="form-label">Email</label>
-                                <input type="text" id="emailBasic" class="form-control" placeholder="xxxx@xxx.xx" />
+                            <div class="col mb-2">
+                                <label for="" class="form-label">Password</label>
+                                <input type="text" id="password" name="password" class="form-control"
+                                    placeholder="**********" />
                             </div>
-                            <div class="col mb-0">
-                                <label for="dobBasic" class="form-label">DOB</label>
-                                <input type="text" id="dobBasic" class="form-control" placeholder="DD / MM / YY" />
+                            <div class="col mb-2">
+                                <label for="" class="form-label">Konfirmasi Password</label>
+                                <input type="password" name="confirm_password" id="confirm_password"
+                                    class="form-control" placeholder="**********" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Alamat</label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="2"
+                                placeholder="Jln. Dipatiukur No. 34 Kota Bandung"></textarea>
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Foto</label>
+                            <input class="form-control" type="file" id="foto" name="foto" name="foto"
+                                onchange="previewImage()" />
+                            <div class="py-3 text-center" id="previewImage">
                             </div>
                         </div>
                     </div>
@@ -226,6 +261,7 @@
                         </button>
                         <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -233,8 +269,35 @@
         <script>
             $('#addData').click(function() {
                 $('#judul').html('Tambah User')
-                $('#basicModal').modal('show');
+                $('#tambahUser').modal('show');
             })
-        </script>
 
+            function previewImage() {
+                var fileInput = document.getElementById('foto');
+                var filePath = fileInput.value;
+                var extensions = /(\.jpg|\.png)$/i;
+                var ukuran = fileInput.files[0].size;
+                if (ukuran > 1000000) {
+                    alert('ukuran terlalu besar. Maksimal 1000KB')
+                    fileInput.value = '';
+                    return false;
+                } else {
+                    if (!extensions.exec(filePath)) {
+                        alert('Silakan unggah file yang memiliki ekstensi .jpg/.png.');
+                        fileInput.value = '';
+                        return false;
+                    } else {
+                        //Image preview
+                        if (fileInput.files && fileInput.files[0]) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                document.getElementById('previewImage').innerHTML = '<img src="' + e.target.result +
+                                    '" width="200px"/>';
+                            };
+                            reader.readAsDataURL(fileInput.files[0]);
+                        }
+                    }
+                }
+            }
+        </script>
     @endsection
