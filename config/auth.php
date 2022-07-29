@@ -46,6 +46,13 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        // untuk guard
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+            
+        ]
     ],
 
     /*
@@ -66,9 +73,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
+
+        // untuk guard
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [
